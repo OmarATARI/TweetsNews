@@ -1,5 +1,5 @@
 from flask import (Flask, Response, request, jsonify, render_template)
-# from database import session
+from database import session
 
 # from forms import ExportForm
 from models import Tweet
