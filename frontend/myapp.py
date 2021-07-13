@@ -1,5 +1,6 @@
 from flask import (Flask, Response, request, jsonify, render_template)
 from database import session
+from api.twitter.get_trends import *
 
 # from forms import ExportForm
 from models import Tweet
@@ -13,6 +14,14 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 @app.route('/')
 def hello():
     return 'hello World'
+
+@app.route('/trends')
+def trends():
+    # fr_trends = get_paris_trends()
+    # uk_trends = get_london_trends()
+    # us_trends = get_ny_trends()
+    return render_template('trends.html', fr_trends=get_paris_trends())
+
 
 # @app.route('/visualization/moment')
 # def visualization():
