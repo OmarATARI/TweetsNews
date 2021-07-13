@@ -8,7 +8,7 @@ flag = True
 while flag:
   try:
     engine = create_engine(
-        'postgresql://user:pwd@postgres:5432/tweets',
+        'postgresql://user:pwd@database:5432/tweets',
         echo=True
     )
     Base.metadata.create_all(engine)
