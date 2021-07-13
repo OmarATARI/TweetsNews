@@ -22,6 +22,21 @@ def accueil():
 def error404(error):
     return render_template('404.html'), 404
 
+@app.route('/last_tweet')
+def last_tweet():
+    """Trend Last Tweet"""
+    return render_template('Lasttweet/accueil.html')
+
+@app.route('/last_trend')
+def last_trend():
+    """Trend Last Tweet"""
+    return render_template('Lasttrend/accueil.html')
+
+@app.route('/export_tweet')
+def export_tweet():
+    """Trend Last Tweet"""
+    return render_template('Export/accueil.html')
+
 
 # @app.route('/visualization/moment')
 # def visualization():
