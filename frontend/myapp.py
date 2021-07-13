@@ -1,18 +1,27 @@
 from flask import (Flask, Response, request, jsonify, render_template)
-from database import session
 
 # from forms import ExportForm
+
+from flask import Flask, render_template
+
 from models import Tweet
-   
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:pwd@localhost/tweets'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:pwd@localhost/tweets'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 
+
 @app.route('/')
-def hello():
-    return 'hello World'
+def accueil():
+    return render_template('accueil.html')
+
+
+@app.errorhandler(404)
+def error404(error):
+    return render_template('404.html'), 404
+
 
 # @app.route('/visualization/moment')
 # def visualization():
@@ -28,7 +37,7 @@ def hello():
 
 #     df = pd.DataFrame(used_data, columns=['tweet_id', 'moment_broadcast'])
 #     df["moment_broadcast"].value_counts().plot(kind='pie')
-    
+
 #     plt.savefig(img, format='png')
 #     img.seek(0)
 #     plot_url = base64.b64encode(img.getvalue()).decode()
@@ -76,5 +85,5 @@ def hello():
 #   return render_template('export.html', form=form)
 
 if __name__ == '__main__':
-  app.debug = True
-  app.run(host='0.0.0.0')
+    app.debug = True
+    app.run(host='0.0.0.0')

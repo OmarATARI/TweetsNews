@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>404 Error - Page Non Trouvé</title>
+    <style type="text/css">
+    body { font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif; color:#333333; text-align:center; font-size:90%; margin:0; padding:0; }
+    #mainContainer { margin:0 auto 20px auto; width:940px; padding:0; text-align:left; }
+    .company { display:inline; float:left; margin:40px 0 0px 280px; }
+    .robot { display:inline; float:left; width:280px; margin:0; overflow:visible; }
+    .header { display:inline; float:left; width:660px; font-size:120%; margin:50px 0 0 0; }
+    .mainContent { display:inline; float:left; width:660px; }
+    .largeFont { font-size:180%; }
+    p { margin:18px 0; padding:0; line-height:1.4em; }
+    ul { margin:-10px 0 0 26px; padding:0; }
+    ul li { margin:5px 0; padding:0; }
+    a { color:#3366cc; text-decoration:none; font-size:105%;}
+    a:hover { color:#111111; text-decoration:underline; }
+    </style>
+</head>
+
+<body>
+<div id="mainContainer">
+
+    <br clear="all"/>
+
+    <div class="robot"><img src="/static/img/404.jpg" width="260" height="350"
+                            alt="ERROR 404"/></div>
+
+    <div class="header"><span class="largeFont">Oops!</span> La page que vous cherchez n'existe pas </div>
+    <br clear="right"/>
+
+    <div class="mainContent">
+        <p>HTTP 404 Error - La page que vous recherchez <br> vient d'etre déplacé supprimé ou n'existe pas</p>
+
+        <p><strong>Tu peux essayer :</strong></p>
+        <ul>
+            <li>Visiter la <a href="{{ url_for('accueil') }}">page d'accueil</a>
+            </li>
+            <li>Assurer vous que t'avez renseigné la bonne adresse</li>
+            <li>Aller à la  <a href="javascript:history.go(-1);"> page </a>  precedente
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
