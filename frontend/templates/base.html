@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Search Engine Meta-->
+    <title>Twitter News</title>
+    <meta name="Description" content="flask application">
+    <meta name="KeyWords" content="twitter, flask, api">
+    <link rel="shortcut icon" type="image/png" href="{{url_for('static', filename='')}}"
+          alt="logo small"/>
+    <!-- Material Icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Materialize-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- FontAwesome Styles-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css"
+          integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <!-- Custom Styles-->
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet"/>
+    <link href="{{url_for('static', filename='css/barnavigation.css')}}" rel="stylesheet"/>
+    <link href="{{url_for('static', filename='css/data.css')}}" rel="stylesheet"/>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap" rel="stylesheet">
+    <!-- jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {% block extrahead %}
+    {% endblock %}
+</head>
+
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+
+    <!-- TOP NAVBAR -->
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ url_for('accueil') }}">
+                <i class="fab fa-twitter-square"></i><strong> Twitter News</strong></a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li><a class="nav-link" target="_blank" href="http://www.findmecity.com/">
+                <i class="fas fa-globe"></i> WOEID Search Engine </a></li>
+            <li><a class="nav-link" href="{{ url_for('accueil') }}">
+                <i class="fas fa-newspaper"></i> Blog Actualités</a></li>
+            <li><a class="nav-link" target="_blank" href="https://github.com/OmarATARI/"><i
+                    class="fab fa-github"></i> GitHub</a></li>
+
+            <li><a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons" id="trigger">menu</i></a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- DROPDOWN -->
+
+
+    <!-- MOBILE -->
+    <ul class="sidenav" id="mobile-demo">
+        <li><a target="_blank" href="http://www.findmecity.com/">
+            <i class="fas fa-globe"></i> WOEID Search Engine </a></li>
+        <li><a href="{{ url_for('accueil') }}">
+            <i class="fas fa-newspaper"></i> Blog Actualités</a></li>
+        <li><a target="_blank" href="https://github.com/OmarATARI/"><i
+                class="fab fa-github"></i> GitHub</a></li>
+
+
+    </ul>
+
+    <!--/. TOP NAVBAR ****************************************************************************************************************************************************************************************** -->
+
+    <!-- PAGE-INDEX -->
+    <div id="page-index">
+
+        {% block row_header %}{% endblock %}
+        <div class="dashboard-cards">
+            <div class="row plain-element">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-sm-push-3 col-md-push-3 col-lg-push-3 plain-element">
+                    {% block content %} {% endblock %}
+
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-sm-pull-6 col-md-pull-6 col-lg-pull-6 col-lg-pull-6 plain-element">
+                    <div class="row plain-element">
+                        <div class="card card-side card-side-left">
+                            <div class="row row-side-blue"></div>
+                            <div class="row row-description">
+                                <div class="col-sm-4 col-md-4 plain-element text-center hashtag-column">
+                                    <i class="fas fa-hashtag hashtag-icon"></i>
+                                </div>
+                                <div class="col-sm-8 col-md-8 plain-element col-features">
+                                    <h1>Twitter News Fonctionnalités</h1>
+                                    <p> Choisir La fonctionnalité </p>
+                                </div>
+                            </div>
+                            <a href="{{ url_for('last_tweet') }}">
+                                <div class="card card-menu">
+                                    <div class="row plain-element">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 plain-element">
+                                            <img src="{{url_for('static', filename='img/tweet-search.jpg')}}"
+                                                 class="img img-card responsive"
+                                                 alt="Tweets">
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 plain-element">
+                                            <h5>
+                                                Derniers Tweets
+                                            </h5>
+                                            <p>Consultez les derniers tweets sur un sujet précis </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="{{ url_for('last_trend') }}">
+                                <div class="card card-menu">
+                                    <div class="row plain-element">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 plain-element">
+                                            <img src="{{url_for('static', filename='img/trend-search.png')}}"
+                                                 class="img img-card responsive"
+                                                 alt="Trends">
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 plain-element">
+                                            <h5>
+                                                les derniers Trends par Pays
+                                            </h5>
+                                            <p>Consulter les derniers trends par region ou pays  </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                             <a href="{{ url_for('export_tweet') }}">
+                                <div class="card card-menu">
+                                    <div class="row plain-element">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 plain-element">
+                                            <img src="{{url_for('static', filename='img/csv-tweet.png')}}"
+                                                 class="img img-card responsive"
+                                                 alt="Tweet en csv">
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 plain-element">
+                                            <h5>
+                                                Exporter Tweets
+                                            </h5>
+                                            <p>Exporter vos tweets en format csv </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <div class="row row-break"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 plain-element">
+                    <div class="row plain-element">
+                        <div class="card card-side card-side-right">
+                            <div class="row row-side-blue"></div>
+                            <div class="row row-description">
+                                <div class="col-sm-4 col-md-4 plain-element text-center hashtag-column">
+                                    <i class="fas fa-hashtag hashtag-icon"></i>
+                                </div>
+                                <div class="col-sm-8 col-md-8 plain-element col-features">
+                                    <h1>Top 10 France Trends </h1>
+                                    <p>Rénitialiser chaque heure </p>
+                                </div>
+                            </div>
+                            <div class="row plain-element">
+                                <div class="card-content">
+                                    <div class="row row-button text-center">
+                                        <a class="btn-trends" target="_blank" href="">Top 10
+                                            Trends</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-projects card-projects-right">
+                            <div class="row plain-element">
+                                <h1>Actualités</h1>
+                            </div>
+                            <br>
+                            <div class="row plain-element row-visit">
+                                <div class="col-xs-3 col-sm-3 col-md-3 plain-element">
+                                    <img src="{{url_for('static', filename='img/google-news.jpg')}}"
+                                         class="img responsive img-icon img-droite" alt="google news">
+                                </div>
+                                <div class="col-xs-8 col-sm-8 col-md-8 plain-element">
+                                    <p> Google News</p>
+                                    <button class="btn-visit" onclick="window.open('http://www.google.com')">Consulter les News
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row header">
+    <div id="messageAlert" class="alert alert-message" role="alert">
+        {% block alert %} {% endblock %}
+    </div>
+
+</div>
+
+<div class="footer">
+    <p><a target="_blank"
+          href="https://www.freeprivacypolicy.com/privacy/view/9b972ff9a2aaeda03f07216c15625791/">Privacy
+        Policy</a> • © 2021  - Tous les droits réservés Omar Reguadi Omar ATARI Gyslain BOKO &trade;</p>
+</div>
+
+
+<!-- Bootstrap Js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- Materialize Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+<!-- Custom Js -->
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+
+</body>
+
+</html>
