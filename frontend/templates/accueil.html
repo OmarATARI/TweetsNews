@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row row-title">
+    <div class="card card-title card-title-main">
+        <div class="row row-blue">
+            <h1><i class="fab fa-twitter"></i> Twitter News </h1>
+        </div>
+        <div class="row plain-element">
+            <div class="card card-sentiment visible card-frontpage">
+                <div class="card-content text-center">
+                    <div class="card-image">
+                        <img src="{{url_for('static', filename='img/twitter.jpg')}}">
+                    </div>
+                    <button class="btn-sentiment" id="flashButton">
+                        <b>Bienvenue Dans Twitter News</b>
+                        <p> Découvrez les tendances du moment</p>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
