@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import requests
+from urllib.parse import unquote
 
 def main_endpoint(woeid):
     auth_token='AAAAAAAAAAAAAAAAAAAAACAROAEAAAAALeao4ZMCbqGOfsvgdWg7en0wWsI%3DbVUSaFnSGBqKBwX9kqYmTsCypNOfx6MoutaVEyZEgvBmsW1W7z'
@@ -10,7 +11,7 @@ def main_endpoint(woeid):
 
     results = []
     for d in data:
-      results.append(d['query'])
+      results.append([unquote(d['query']), d['url']])
 
     return results
 
@@ -31,5 +32,3 @@ def get_sydney_trends():
 
 def get_seoul_trends():
     return main_endpoint(1132599)
-
-  

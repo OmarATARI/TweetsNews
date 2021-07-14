@@ -1,4 +1,5 @@
 from flask import (Flask, Response, request, jsonify, render_template)
+from api.twitter.get_trends import *
 
 # from forms import ExportForm
 
@@ -17,7 +18,6 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 def accueil():
     return render_template('accueil.html')
 
-
 @app.errorhandler(404)
 def error404(error):
     return render_template('404.html'), 404
@@ -30,21 +30,20 @@ def last_tweet():
 @app.route('/last_trend')
 def last_trend():
     """Trend Last Tweet"""
-    return render_template('Lasttrend/accueil.html')
+    trends_by_location = {
+      'Paris': get_paris_trends(),
+      'Londres': get_london_trends(), 
+      'New-York': get_ny_trends(),
+      'Tokyo': get_tokyo_trends(),
+      'Syndey': get_sydney_trends(),
+      'Seoul': get_seoul_trends()
+      }
+    return render_template('Lasttrend/accueil.html', trends=trends_by_location)
 
 @app.route('/export_tweet')
 def export_tweet():
     """Trend Last Tweet"""
     return render_template('Export/accueil.html')
-
-
-@app.route('/trends')
-def trends():
-    # fr_trends = get_paris_trends()
-    # uk_trends = get_london_trends()
-    # us_trends = get_ny_trends()
-    return render_template('trends.html', fr_trends=get_paris_trends())
-
 
 # @app.route('/visualization/moment')
 # def visualization():
