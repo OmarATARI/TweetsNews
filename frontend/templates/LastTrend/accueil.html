@@ -10,12 +10,15 @@
         <div class="row plain-element">
             <div class="card card-sentiment visible card-frontpage">
                 <div class="card-content text-center">
+                  <button class="btn-sentiment" id="flashButton">
+                      <b>Bienvenue Dans Last Trends</b>
+                      <p> Découvrez les tendances du moment</p>
+                  </button>
+                  </br>
 
-                    <button class="btn-sentiment" id="flashButton">
-                        <b>Bienvenue Dans Last Trends</b>
-                        <p> Découvrez les tendances du moment</p>
-                    </button>
-
+                  {% for item in trends['Paris'] %}
+                    <li><a target='_blank' href={{item[1]}}>{{item[0]}}</a></li>
+                  {% endfor %}
                 </div>
             </div>
         </div>
