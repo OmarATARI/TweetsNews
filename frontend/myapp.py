@@ -6,8 +6,6 @@ from api.twitter.get_trends import *
 
 from flask import Flask, render_template
 
-
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://user:pwd@localhost/tweets'
@@ -30,13 +28,15 @@ def last_tweet():
     """Trend Last Tweet"""
     return render_template('Lasttweet/accueil.html')
 
+
 @app.route('/last_trend/paris')
 def paris_trend():
     """Trend Last Tweet"""
     trends_by_location = {
         'Paris': get_paris_trends()
     }
-    return render_template('LastTrend/City/Paris.html' , trends=trends_by_location)
+    return render_template('LastTrend/City/Paris.html', trends=trends_by_location)
+
 
 @app.route('/last_trend/london')
 def london_trend():
@@ -44,7 +44,9 @@ def london_trend():
     trends_by_location = {
         'Londres': get_london_trends()
     }
-    return render_template('LastTrend/City/London.html' , trends=trends_by_location)
+    return render_template('LastTrend/City/London.html', trends=trends_by_location)
+
+
 @app.route('/last_trend/newyork')
 def newyork_trend():
     """Trend Last Tweet"""
@@ -52,7 +54,8 @@ def newyork_trend():
         'New-York': get_ny_trends()
 
     }
-    return render_template('LastTrend/City/NewYork.html' , trends=trends_by_location)
+    return render_template('LastTrend/City/NewYork.html', trends=trends_by_location)
+
 
 @app.route('/last_trend/seoul')
 def seoul_trend():
@@ -60,7 +63,8 @@ def seoul_trend():
     trends_by_location = {
         'Seoul': get_seoul_trends()
     }
-    return render_template('LastTrend/City/Seoul.html' , trends=trends_by_location)
+    return render_template('LastTrend/City/Seoul.html', trends=trends_by_location)
+
 
 @app.route('/last_trend/sydney')
 def sydney_trend():
@@ -69,6 +73,7 @@ def sydney_trend():
         'Syndey': get_sydney_trends()
     }
     return render_template('LastTrend/City/Sydney.html', trends=trends_by_location)
+
 
 @app.route('/last_trend/tokyo')
 def tokyo_trend():
