@@ -105,6 +105,14 @@ def export_tweet():
     return render_template('Export/accueil.html')
 
 
+@app.route('/trends')
+def trends():
+    # fr_trends = get_paris_trends()
+    # uk_trends = get_london_trends()
+    # us_trends = get_ny_trends()
+    return render_template('trends.html', fr_trends=get_paris_trends())
+
+
 # @app.route('/visualization/moment')
 # def visualization():
 #   try:

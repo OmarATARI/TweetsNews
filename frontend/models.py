@@ -24,3 +24,25 @@ class Tweet(Base):
       'tweet_id': self.tweet_id,
       'language': self.language
     }
+
+class Trend(Base):
+  """"TweetsTrend"""
+
+  __tablename__ = "trends"
+  id = Column(BigInteger, primary_key=True, autoincrement="auto")
+  title = Column(String)
+  url = Column(String)
+  location_city = Column(String)
+  woeid = Column(Integer)
+
+  def __repr__(self):
+    return "<Trend %r>" % self.name
+
+  def serialize(self):
+    return {
+      'id': self.id,
+      'title': self.title,
+      'url': self.url,
+      'location_city': self.location_city,
+      'woeid': self.woeid
+    }
