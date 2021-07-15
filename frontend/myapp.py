@@ -1,11 +1,12 @@
 from flask import (Flask, Response, request, jsonify, render_template)
+
 from api.twitter.get_trends import *
 
 # from forms import ExportForm
 
 from flask import Flask, render_template
 
-from models import Tweet
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
@@ -18,32 +19,86 @@ app.config['SECRET_KEY'] = 'you-will-never-guess'
 def accueil():
     return render_template('accueil.html')
 
+
 @app.errorhandler(404)
 def error404(error):
     return render_template('404.html'), 404
+
 
 @app.route('/last_tweet')
 def last_tweet():
     """Trend Last Tweet"""
     return render_template('Lasttweet/accueil.html')
 
+@app.route('/last_trend/paris')
+def paris_trend():
+    """Trend Last Tweet"""
+    trends_by_location = {
+        'Paris': get_paris_trends()
+    }
+    return render_template('LastTrend/City/Paris.html' , trends=trends_by_location)
+
+@app.route('/last_trend/london')
+def london_trend():
+    """Trend Last Tweet"""
+    trends_by_location = {
+        'Londres': get_london_trends()
+    }
+    return render_template('LastTrend/City/London.html' , trends=trends_by_location)
+@app.route('/last_trend/newyork')
+def newyork_trend():
+    """Trend Last Tweet"""
+    trends_by_location = {
+        'New-York': get_ny_trends()
+
+    }
+    return render_template('LastTrend/City/NewYork.html' , trends=trends_by_location)
+
+@app.route('/last_trend/seoul')
+def seoul_trend():
+    """Trend Last Tweet"""
+    trends_by_location = {
+        'Seoul': get_seoul_trends()
+    }
+    return render_template('LastTrend/City/Seoul.html' , trends=trends_by_location)
+
+@app.route('/last_trend/sydney')
+def sydney_trend():
+    """Trend Last Tweet"""
+    trends_by_location = {
+        'Syndey': get_sydney_trends()
+    }
+    return render_template('LastTrend/City/Sydney.html', trends=trends_by_location)
+
+@app.route('/last_trend/tokyo')
+def tokyo_trend():
+    """Trend Last Tweet"""
+    trends_by_location = {
+        'Tokyo': get_tokyo_trends()
+
+    }
+    return render_template('LastTrend/City/Tokyo.html', trends=trends_by_location)
+
+
 @app.route('/last_trend')
 def last_trend():
     """Trend Last Tweet"""
     trends_by_location = {
-      'Paris': get_paris_trends(),
-      'Londres': get_london_trends(), 
-      'New-York': get_ny_trends(),
-      'Tokyo': get_tokyo_trends(),
-      'Syndey': get_sydney_trends(),
-      'Seoul': get_seoul_trends()
-      }
+        'Paris': get_paris_trends(),
+        'Londres': get_london_trends(),
+        'New-York': get_ny_trends(),
+        'Tokyo': get_tokyo_trends(),
+        'Syndey': get_sydney_trends(),
+        'Seoul': get_seoul_trends()
+    }
     return render_template('Lasttrend/accueil.html', trends=trends_by_location)
+
 
 @app.route('/export_tweet')
 def export_tweet():
     """Trend Last Tweet"""
     return render_template('Export/accueil.html')
+
 
 # @app.route('/visualization/moment')
 # def visualization():

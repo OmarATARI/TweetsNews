@@ -522,9 +522,9 @@ input.invalid[type="text"]:not(.browser-default) {
 .input-field .prefix {
     top: 0px;
     left: 5px;
-    width: 2.8rem;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    width: 1.4rem;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 
