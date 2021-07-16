@@ -16,6 +16,9 @@
                         <p> Découvrez les derniers tweets sur un sujet </p>
                     </button>
 
+                    {% for item in tweets %}
+                        <li>{{item['tweet']}}</li>
+                    {% endfor %}
                 </div>
             </div>
         </div>
