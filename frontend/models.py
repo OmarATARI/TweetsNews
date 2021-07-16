@@ -10,9 +10,11 @@ class Tweet(Base):
 
   __tablename__ = "tweets"
   id = Column(BigInteger, primary_key=True, autoincrement="auto")
-  tweet = Column(String)
+  tweet = Column(Text)
+  created_at = Column(DateTime)
   tweet_id = Column(String)
   language = Column(String)
+  author = Column(String)
 
   def __repr__(self):
     return "<Tweet %r>" % self.name
@@ -21,8 +23,10 @@ class Tweet(Base):
     return {
       'id': self.id,
       'tweet': self.tweet,
+      'created_at': self.created_at,
       'tweet_id': self.tweet_id,
-      'language': self.language
+      'language': self.language,
+      'author': self.author
     }
 
 class Trend(Base):

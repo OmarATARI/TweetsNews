@@ -1,6 +1,8 @@
 from flask import (Flask, Response, request, jsonify, render_template)
 
 from api.twitter.get_trends import *
+from api.twitter.get_tweets import get_tweets
+from models import Tweet
 
 # from forms import ExportForm
 
@@ -26,7 +28,12 @@ def error404(error):
 @app.route('/last_tweet')
 def last_tweet():
     """Trend Last Tweet"""
-    return render_template('Lasttweet/accueil.html')
+    # peuple la base avec une recherche simple sur le covid en français
+    get_tweets('covid', 'fr')
+    # récupération des tweets à partir de la base de données
+    all_tweets = session.query(Tweet).all()
+
+    return render_template('Lasttweet/accueil.html', tweets=all_tweets)
 
 
 @app.route('/last_trend/paris')
@@ -96,46 +103,13 @@ def last_trend():
         'Syndey': get_sydney_trends(),
         'Seoul': get_seoul_trends()
     }
-    return render_template('Lasttrend/accueil.html', trends=trends_by_location)
+    return render_template('LastTrend/accueil.html', trends=trends_by_location)
 
 
 @app.route('/export_tweet')
 def export_tweet():
     """Trend Last Tweet"""
     return render_template('Export/accueil.html')
-
-
-@app.route('/trends')
-def trends():
-    # fr_trends = get_paris_trends()
-    # uk_trends = get_london_trends()
-    # us_trends = get_ny_trends()
-    return render_template('trends.html', fr_trends=get_paris_trends())
-
-
-# @app.route('/visualization/moment')
-# def visualization():
-#   try:
-#     img = io.BytesIO()
-#     tweets = session.query(Tweet).all()
-#     data = [t.serialize() for t in tweets]
-
-#     used_data = {'tweet_id': [], 'moment_broadcast': []}
-#     for d in data:
-#       used_data['tweet_id'].append(d['id'])
-#       used_data['moment_broadcast'].append(d['type'])
-
-#     df = pd.DataFrame(used_data, columns=['tweet_id', 'moment_broadcast'])
-#     df["moment_broadcast"].value_counts().plot(kind='pie')
-
-#     plt.savefig(img, format='png')
-#     img.seek(0)
-#     plot_url = base64.b64encode(img.getvalue()).decode()
-
-#     return '<img src="data:image/png;base64,{}">'.format(plot_url)
-
-#   except Exception as e:
-#     return(str(e))
 
 # def parse_datetime(str_date) -> datetime:
 #   """
