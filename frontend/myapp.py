@@ -8,8 +8,6 @@ from models import Tweet
 from io import StringIO
 import csv
 
-# from forms import ExportForm
-
 from flask import Flask, render_template
 from forms import ExportForm, SearchTweetsForm
 
@@ -165,11 +163,6 @@ def search():
     cw.writerow(d)
 
   return Response(output.getvalue(), mimetype="text/csv")
-
-# @app.route('/export')
-# def export():
-#   form = ExportForm()
-#   return render_template('export.html', form=form)
 
 if __name__ == '__main__':
     app.debug = True
