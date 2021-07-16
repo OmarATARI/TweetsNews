@@ -4,21 +4,26 @@ import requests
 from urllib.parse import unquote
 from database import session
 from models import Trend
+import os
 
 def main_endpoint(woeid, city_title):
-    auth_token = 'AAAAAAAAAAAAAAAAAAAAACAROAEAAAAALeao4ZMCbqGOfsvgdWg7en0wWsI%3DbVUSaFnSGBqKBwX9kqYmTsCypNOfx6MoutaVEyZEgvBmsW1W7z'
+    auth_token = os.environ['TWITTER_BEARER']
     hed = {'Authorization': 'Bearer ' + auth_token}
     response = requests.get("https://api.twitter.com/1.1/trends/place.json?id={0}".format(woeid), headers=hed)
-    data = response.json()[0]['trends']
+    if response.status_code == 200:
+        data = response.json()[0]['trends']
 
-    results = []
-    for d in data:
-        current_trend = Trend(title=unquote(d['query']), url=d['url'], woeid=woeid, location_city=city_title)
-        session.add(current_trend)
-        results.append([unquote(d['query']), d['url']])
+        results = []
+        for d in data:
+            current_trend = Trend(title=unquote(d['query']), url=d['url'], woeid=woeid, location_city=city_title)
+            session.add(current_trend)
+            results.append([unquote(d['query']), d['url']])
 
-    session.commit()
-    return results
+        session.commit()
+        return results
+    else:
+        print('An Error occured')
+        return False
 
 def get_paris_trends():
     return main_endpoint(615702, 'Paris')

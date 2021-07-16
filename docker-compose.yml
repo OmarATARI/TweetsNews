@@ -11,6 +11,8 @@ services:
       - "5000:5000"
     depends_on:
       - database
+    env_file:
+      - frontend/.env
   database:
     image: postgres:13.2
     ports:

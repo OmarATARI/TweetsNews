@@ -4,26 +4,31 @@ import requests
 from urllib.parse import unquote
 from database import session
 from models import Tweet
+import os
 
 def get_tweets(q, lang):
-    auth_token = 'AAAAAAAAAAAAAAAAAAAAACAROAEAAAAALeao4ZMCbqGOfsvgdWg7en0wWsI%3DbVUSaFnSGBqKBwX9kqYmTsCypNOfx6MoutaVEyZEgvBmsW1W7z'
+    auth_token = os.environ['TWITTER_BEARER']
     hed = {'Authorization': 'Bearer ' + auth_token}
     response = requests.get('https://api.twitter.com/1.1/search/tweets.json?q={0}&lang={1}'.format(q, lang), headers=hed)
-    data = response.json()['statuses']
+    if response.status_code == 200:
+        data = response.json()['statuses'] 
 
-    results = []
-    for d in data:
-        current_tweet = Tweet(
-            tweet=unquote(d['text']),
-            created_at=d['created_at'],
-            tweet_id=d['id_str'],
-            language=d['lang'],
-            author=d['user']['name']
-            )
-        session.add(current_tweet)
+        results = []
+        for d in data:
+            current_tweet = Tweet(
+                tweet=unquote(d['text']),
+                created_at=d['created_at'],
+                tweet_id=d['id_str'],
+                language=d['lang'],
+                author=d['user']['name']
+                )
+            session.add(current_tweet)
 
-    session.commit()
-    return results
+        session.commit()
+        return results
+    else:
+        print('An Error occured')
+        return False
 
 
 ## Réponse type de l'api - data variable
