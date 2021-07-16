@@ -16,6 +16,31 @@
                         <p> Exporter vos tweets</p>
                     </button>
 
+                    <form action="/search" method="get">
+                        <p>
+                            {{ form.day_start.label }}
+                            {{ form.day_start(class='datepicker') }}
+                            <br>
+                            {{ form.day_end.label }}
+                            {{ form.day_end(class='datepicker') }}
+                        </p>
+                        <p>
+                            {{ form.hour_start.label }}
+                            {{ form.hour_start }}
+                            <br>
+                            {{ form.hour_end.label }}
+                            {{ form.hour_end }}
+                        </p>
+                        <p>
+                            {{ form.term.label }}
+                            {{ form.term(size=32) }}
+                        </p>
+                        <p>
+                            {{ form.author.label }}
+                            {{ form.author(size=32) }}
+                        </p>
+                        {{ form.submit }}
+                    </form>
                 </div>
             </div>
         </div>

@@ -1,12 +1,17 @@
 from flask import (Flask, Response, request, jsonify, render_template)
+from datetime import datetime
 
 from api.twitter.get_trends import *
 from api.twitter.get_tweets import get_tweets
+from forms import ExportForm
 from models import Tweet
+from io import StringIO
+import csv
 
 # from forms import ExportForm
 
 from flask import Flask, render_template
+from forms import ExportForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
@@ -109,39 +114,46 @@ def last_trend():
 @app.route('/export_tweet')
 def export_tweet():
     """Trend Last Tweet"""
-    return render_template('Export/accueil.html')
+    form = ExportForm()
+    return render_template('Export/accueil.html', form=form)
 
-# def parse_datetime(str_date) -> datetime:
-#   """
-#     Parse a datetime string with the format %Y-%m-%d %H:%M:%S
+def parse_datetime(str_date) -> datetime:
+  """
+    Parse a datetime string with the format %Y-%m-%d %H:%M:%S
 
-#     Parameters
-#     ----------
-#     str_date : str
-#       the datetime
+    Parameters
+    ----------
+    str_date : str
+      the datetime
 
-#     Returns
-#     -------
-#     datetime
-#   """
-#   return datetime.strptime(str_date, '%Y-%m-%d %H:%M:%S')
+    Returns
+    -------
+    datetime
+  """
+  return datetime.strptime(str_date, '%Y-%m-%d %H:%M:%S')
 
-# @app.route('/search')
-# def search():
-#   output = StringIO()
-#   cw = csv.DictWriter(output,
-#     fieldnames=['id', 'utc_date', 'local_datetime', 'tweet', 'tweet_id', 'language', 'timezone', 'type'])
-#   cw.writeheader()
+@app.route('/search')
+def search():
+  output = StringIO()
+  cw = csv.DictWriter(output,
+    fieldnames=['id', 'tweet', 'created_at', 'tweet_id', 'language', 'author'])
+  cw.writeheader()
 
-#   start_datetime = parse_datetime(request.args.get('day_start')+ ' ' + request.args.get('hour_start'))
-#   end_datetime = parse_datetime(request.args.get('day_end')+ ' ' + request.args.get('hour_end'))
-#   tweets = session.query(Tweet).filter(Tweet.utc_date <= end_datetime, Tweet.utc_date >= start_datetime)
-#   data = [t.serialize() for t in tweets]
+  author = request.args.get('author')
+  term = request.args.get('term')
+  start_datetime = parse_datetime(request.args.get('day_start')+ ' ' + request.args.get('hour_start'))
+  end_datetime = parse_datetime(request.args.get('day_end')+ ' ' + request.args.get('hour_end'))
+  tweets = session.query(Tweet).filter(
+      Tweet.author.contains(author),
+      Tweet.tweet.contains(term),
+      Tweet.created_at <= end_datetime, 
+      Tweet.created_at >= start_datetime)
+  data = [t.serialize() for t in tweets]
 
-#   for d in data:
-#     cw.writerow(d)
+  for d in data:
+    cw.writerow(d)
 
-#   return Response(output.getvalue(), mimetype="text/csv")
+  return Response(output.getvalue(), mimetype="text/csv")
 
 # @app.route('/export')
 # def export():

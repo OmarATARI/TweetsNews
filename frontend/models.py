@@ -10,14 +10,14 @@ class Tweet(Base):
 
   __tablename__ = "tweets"
   id = Column(BigInteger, primary_key=True, autoincrement="auto")
-  tweet = Column(Text)
+  tweet = Column(String)
   created_at = Column(DateTime)
   tweet_id = Column(String)
   language = Column(String)
   author = Column(String)
 
   def __repr__(self):
-    return "<Tweet %r>" % self.name
+    return "<Tweet %r>" % self.tweet_id
 
   def serialize(self):
     return {
