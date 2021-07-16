@@ -11,7 +11,7 @@ import csv
 # from forms import ExportForm
 
 from flask import Flask, render_template
-from forms import ExportForm
+from forms import ExportForm, SearchTweetsForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
@@ -19,15 +19,31 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 
-
 @app.route('/')
 def accueil():
     return render_template('accueil.html')
 
-
 @app.errorhandler(404)
 def error404(error):
     return render_template('404.html'), 404
+
+@app.route('/search_tweets')
+def search_tweets():
+    """Search tweets form"""
+    form = SearchTweetsForm()
+    return render_template('Lasttweet/search.html', form=form)
+
+@app.route('/search_api')
+def search_api():
+    """Fetch tweets from api"""
+    form = SearchTweetsForm()
+    get_tweets(request.args.get('term'), request.args.get('lang'))
+    searched_tweets = session.query(Tweet).filter(
+        Tweet.tweet.contains(request.args.get('term')),
+        Tweet.language == request.args.get('lang')
+    )
+    
+    return render_template('Lasttweet/search.html', form=form, tweets=searched_tweets)
 
 
 @app.route('/last_tweet')
@@ -40,7 +56,6 @@ def last_tweet():
 
     return render_template('Lasttweet/accueil.html', tweets=all_tweets)
 
-
 @app.route('/last_trend/paris')
 def paris_trend():
     """Trend Last Tweet"""
@@ -49,7 +64,6 @@ def paris_trend():
     }
     return render_template('LastTrend/City/Paris.html', trends=trends_by_location)
 
-
 @app.route('/last_trend/london')
 def london_trend():
     """Trend Last Tweet"""
@@ -57,7 +71,6 @@ def london_trend():
         'Londres': get_london_trends()
     }
     return render_template('LastTrend/City/London.html', trends=trends_by_location)
-
 
 @app.route('/last_trend/newyork')
 def newyork_trend():
@@ -68,7 +81,6 @@ def newyork_trend():
     }
     return render_template('LastTrend/City/NewYork.html', trends=trends_by_location)
 
-
 @app.route('/last_trend/seoul')
 def seoul_trend():
     """Trend Last Tweet"""
@@ -76,7 +88,6 @@ def seoul_trend():
         'Seoul': get_seoul_trends()
     }
     return render_template('LastTrend/City/Seoul.html', trends=trends_by_location)
-
 
 @app.route('/last_trend/sydney')
 def sydney_trend():

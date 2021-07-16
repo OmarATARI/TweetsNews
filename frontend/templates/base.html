@@ -114,6 +114,23 @@
                                     </div>
                                 </div>
                             </a>
+                            <a href="{{ url_for('search_tweets') }}">
+                                <div class="card card-menu">
+                                    <div class="row plain-element">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 plain-element">
+                                            <img src="{{url_for('static', filename='img/tweet-search.jpg')}}"
+                                                 class="img img-card responsive"
+                                                 alt="Tweets">
+                                        </div>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 plain-element">
+                                            <h5>
+                                                Recherche de Tweets
+                                            </h5>
+                                            <p>Récuperer les derniers tweets d'actualité </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
                             <a href="{{ url_for('last_trend') }}">
                                 <div class="card card-menu">
                                     <div class="row plain-element">

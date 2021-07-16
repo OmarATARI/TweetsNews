@@ -11,3 +11,8 @@ class ExportForm(FlaskForm):
   day_end = DateField('Date de fin', format='%Y-%m-%d')
   hour_end = StringField('Heure de fin', validators=[DataRequired()])
   submit = SubmitField('Exporter')
+
+class SearchTweetsForm(FlaskForm):
+  term = StringField('Recherche')
+  lang = SelectField(u'Language', choices=[('fr', 'Français'), ('en', 'Anglais'), ('de', 'Allemand'), ('es', 'Espagnol')])
+  submit = SubmitField('Rechercher')
