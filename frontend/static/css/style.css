@@ -1,0 +1,470 @@
+/*------------------------------------------------------------------------------
+    MAIN  STYLES    
+------------------------------------------------------------------------------*/
+* {-webkit-font-smoothing: antialiased;}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight:  200 300;
+    src: url('/static/fonts/TTF/OpenSans-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: normal;
+    src: url('/static/fonts/TTF/OpenSans-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-weight:  400 500;
+    src: url('/static/fonts/TTF/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-weight: 600 700;
+    src: url('/static/fonts/TTF/OpenSans-Bold.ttf');
+}
+
+body {
+    font-family: 'Open Sans';
+    position: relative;
+    background-color: #e6ecf0;
+    margin: 0;
+    padding-bottom: 0;
+}
+
+
+
+#wrapper {
+    width: 100%;
+
+}
+
+#page-index {
+    width: 100%;
+    display: block;
+    overflow: auto;
+    position: relative;
+    top: 55px;
+    min-height: 800px;
+
+}
+
+#page-index a {
+    text-decoration: none;
+    outline: 0;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.plain-element {
+    margin:0px;
+    padding: 0px;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
+
+#tweetColumn a {
+    color: black;
+}
+
+#trends {
+    padding-top: 10px;
+    padding-right: 0px;
+}
+
+.img-icon {
+    border-radius: 50%;
+}
+
+.img-droite{
+    height: 48px;
+    width: 48px;
+}
+
+.fa-clipboard {
+    margin-left: 20%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+.modal {
+    width: 20%;
+    height: 480px;
+}
+
+.modal-trigger {
+    font-size: 12px;
+}
+
+.warning {
+    color: red !important;
+}
+
+.visible {
+    display: block !important;
+}
+
+
+.keyword {
+    background-color: #f1f8ff;
+    color: #0366d6;
+    margin: .5em .5em .5em .5em;
+    padding: .3em .9em;
+    font-weight: 500;
+    font-size: 0.7rem !important;
+    line-height: 1.5;
+    border-radius: 5px;
+}
+
+.keyword:hover {
+    background-color: #def;
+}
+
+/*------------------------------------------------------------------------------
+    ROWS & COLUMNS
+------------------------------------------------------------------------------*/
+
+.dashboard-cards {
+    width: 60%;
+    margin: auto;
+}
+
+.row-title {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+
+}
+
+.row-form-s6 {
+    width: 50%;
+    margin: auto;
+}
+
+.row-form-s3 {
+    width: 25%;
+    margin: auto;
+}
+
+
+.row-title h1 {
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+   margin-bottom: 3%;
+    margin-top: 6%;
+}
+
+.row-title p {
+    color: #657786;
+    font-size: 12px;
+    font-weight: 400;
+
+}
+
+
+.row-cards {
+    width: 100%;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 3%;
+}
+
+.row-blue {
+    padding: 2%;
+    background: #1E90FF;
+
+}
+
+
+.row-side-blue {
+  height: 47px;
+    min-height: 37px;
+
+    margin: 0;
+    background: #1E90FF;
+    border: none;
+
+
+}
+
+.row-description {
+    margin: 0px;
+}
+
+.row-description p {
+    color: #657786;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    font-weight: 300;
+    z-index: 5;
+}
+
+.row-trend {
+    margin-bottom: 0px;
+    height: 40px;
+
+}
+
+.row-side-trend {
+    margin-bottom: 0px;
+    height: 40px;
+}
+
+.row-button {
+    margin: 3%;
+}
+
+
+.row-visit {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6ecf0;
+}
+
+#tweetColumn {
+    max-height: 490px;
+    overflow: auto;
+}
+
+#tweetColumnLong {
+    max-height: 690px;
+    overflow: auto;
+}
+
+
+.row-break {
+    height: 0px;
+}
+
+
+
+/*------------------------------------------------------------------------------
+    BUTTONS
+------------------------------------------------------------------------------*/
+
+
+.btn-trends {
+    color: white;
+    background: #4ab3f4;
+    border-radius: 20px;
+    border:none;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+
+}
+
+.btn-trends:hover,
+.btn-trends:active,
+.btn-trends:focus {
+    background: #006dbf;
+    color: white;
+}
+
+
+.btn-visit {
+    color: #1E90FF;
+    background: #ffff;
+    border-radius: 20px;
+    border: 1px solid #1E90FF;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 4px 12px;
+    position: relative;
+    text-align: center;
+    margin-bottom: 0;
+    text-transform: none;
+}
+
+.btn-visit:hover,
+.btn-visit:active,
+.btn-visit:focus {
+    background: #e8f5fd;
+}
+
+.inline-button {
+    background: none;
+    box-shadow: none;
+    border: none;
+    color: #798b9a;
+}
+
+.inline-button:hover,
+.inline-button:active,
+.inline-button:focus {
+    color: #1E90FF;
+    background: none;
+    box-shadow: none;
+}
+
+.btn-enter {
+    height: 100%;
+    width: 100%;
+    text-align: right;
+    font-size: 1rem;
+    font-weight: bold;
+    background: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    color: #1E90FF;
+}
+
+.btn-enter i {
+    font-size: 0.8rem;
+}
+
+.btn-enter:hover, .btn-enter:focus, .btn-enter:active {
+    background: transparent;
+    background-color: transparent;
+    color: green;
+}
+
+
+
+
+
+/*------------------------------------------------------------------------------
+    FOOTER
+------------------------------------------------------------------------------*/
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: transparent;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 12px;
+    color: #8A8A8A;
+    padding: 15px 0px;
+    text-align: center;
+}
+
+.footer a {
+    color: #8A8A8A;
+}
+
+.footer a:hover,
+.footer a:focus,
+.footer a:active {
+    color: #4f84ae;
+    text-decoration: none;
+}
+
+
+/*------------------------------------------------------------------------------
+    TABLE
+------------------------------------------------------------------------------*/
+
+.dataTables_info {
+    display: none;
+}
+
+th {
+    background: #f4faff;
+    color: #14171a;
+    font-size: 12px;
+    border-bottom: 1px solid #8ccff8;
+}
+
+tr {
+    font-size: 12px;
+    color: #14171a;
+}
+
+td {
+    padding: 10px 5px;
+}
+
+/*------------------------------------------------------------------------------
+    ANIMATIONS
+------------------------------------------------------------------------------*/
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1.5s linear infinite;
+  margin-top: 20%;
+  margin-left: 40%;
+  display: none;
+}
+
+.popular-loader {
+    margin-top: 5%;
+    margin-left: 40%;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.glow {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    box-shadow: 0 0 2px #fff, 0 0 4px #ddbbdc;
+  }
+  to {
+    box-shadow: 0 0 4px #fff, 0 0 6px #a26ab2;
+  }
+}
+
+
+
+/*------------------------------------------------------------------------------
+    MEDIA QUERIES
+------------------------------------------------------------------------------*/
+
+
+/* MAX WIDTHS: LARGE SCREEN---------------------------------------------------*/
+
+
+@media(max-width:1700px) {
+
+}
+
+@media(max-width:1440px) {
+
+}
+
+
+
+/* MAX WIDTHS: MEDIUM SCREEN---------------------------------------------------*/
+
+@media(max-width:993px) {
+
+}
+
+
+/* MAX WIDTHS: EXTRA-SMALL SCREEN---------------------------------------------*/
+
+@media(max-width:522px) {
+
+}

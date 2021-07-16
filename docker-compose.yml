@@ -1,11 +1,6 @@
 version: '3.8'
 
 services:
-  backend:
-    build: ./backend
-    volumes:
-      - ./backend:/src
-    tty: true
   frontend:
     build: ./frontend
     volumes:
@@ -14,3 +9,16 @@ services:
       FLASK_ENV: development
     ports:
       - "5000:5000"
+    depends_on:
+      - database
+    env_file:
+      - frontend/.env
+  database:
+    image: postgres:13.2
+    ports:
+      - "5005:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pwd
+      POSTGRES_DB: tweets
+

@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row row-title">
+    <div class="card card-title card-title-main">
+        <div class="row row-blue">
+            <h1><i class="fab fa-twitter"></i> Search Tweets </h1>
+        </div>
+        <div class="row plain-element">
+            <div class="card card-sentiment visible card-frontpage">
+                <div class="card-content text-center">
+
+                    <button class="btn-sentiment" id="flashButton">
+                        <b>Bienvenue Dans la recherche de tweets</b>
+                        <p> Rechercher des nouveaux tweets</p>
+                    </button>
+
+                    <form action="/search_api" method="get">
+                      <p>
+                          {{ form.term.label }}
+                          {{ form.term(size=32) }}
+                      </p>
+                      <p>
+                          {{ form.lang.label }}
+                          {{ form.lang(size=32) }}
+                      </p>
+                      {{ form.submit }}
+                    </form>
+                    {% if tweets %}
+                      {% for item in tweets %}
+                      <li>{{item['tweet']}}</li>
+                      {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+

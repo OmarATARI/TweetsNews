@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row row-title">
+    <div class="card card-title card-title-main">
+        <div class="row row-blue">
+            <h1><i class="fab fa-twitter"></i> Last Tweet </h1>
+        </div>
+        <div class="row plain-element">
+            <div class="card card-sentiment visible card-frontpage">
+                <div class="card-content text-center">
+
+                    <button class="btn-sentiment" id="flashButton">
+                        <b>Bienvenue Dans Last Tweet</b>
+                        <p> Découvrez les derniers tweets sur un sujet </p>
+                    </button>
+
+
+                    <div class="row row-cards">
+
+                          {% for item in tweets %}
+                        <button class="btn-sentiment mt-2" >
+                        <b>Tweet :</b>
+                        <p> {{item['tweet']}}</p>
+                          </button>
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
