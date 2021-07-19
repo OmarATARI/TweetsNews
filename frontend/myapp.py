@@ -2,7 +2,7 @@ from flask import (Flask, Response, request, jsonify, render_template)
 from datetime import datetime
 
 from api.twitter.get_trends import *
-from api.twitter.get_tweets import get_tweets
+from api.twitter.get_tweets import *
 from forms import ExportForm
 from models import Tweet
 from io import StringIO
@@ -35,11 +35,91 @@ def search_tweets():
 def search_api():
     """Fetch tweets from api"""
     form = SearchTweetsForm()
-    get_tweets(request.args.get('term'), request.args.get('lang'))
-    searched_tweets = session.query(Tweet).filter(
-        Tweet.tweet.contains(request.args.get('term')),
-        Tweet.language == request.args.get('lang')
-    )
+    if request.args.get('city') == None:
+        get_tweets(request.args.get('term'), request.args.get('lang'))
+        searched_tweets = session.query(Tweet).filter(
+            Tweet.tweet.contains(request.args.get('term')),
+            Tweet.language == request.args.get('lang')
+        )
+    else:
+        if request.args.get('city') == 'Paris':
+            get_tweets_paris(request.args.get('term'), request.args.get('lang'))
+            if (request.args.get('lang') != None):
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.language == request.args.get('lang'),
+                    Tweet.city == request.args.get('city')
+                )
+            else:
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.city == request.args.get('city')
+                )
+        elif request.args.get('city') == 'Londres':
+            get_tweets_london(request.args.get('term'), request.args.get('lang'))
+            if (request.args.get('lang') != None):
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.language == request.args.get('lang'),
+                    Tweet.city == request.args.get('city')
+                )
+            else:
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.city == request.args.get('city')
+                )
+        elif request.args.get('city') == 'New-York':
+            get_tweets_ny(request.args.get('term'), request.args.get('lang'))
+            if (request.args.get('lang') != None):
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.language == request.args.get('lang'),
+                    Tweet.city == request.args.get('city')
+                )
+            else:
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.city == request.args.get('city')
+                )
+        elif request.args.get('city') == 'Sydney':
+            get_tweets_sydney(request.args.get('term'), request.args.get('lang'))
+            if (request.args.get('lang') != None):
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.language == request.args.get('lang'),
+                    Tweet.city == request.args.get('city')
+                )
+            else:
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.city == request.args.get('city')
+                )
+        elif request.args.get('city') == 'Seoul':
+            get_tweets_seoul(request.args.get('term'), request.args.get('lang'))
+            if (request.args.get('lang') != None):
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.language == request.args.get('lang'),
+                    Tweet.city == request.args.get('city')
+                )
+            else:
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.city == request.args.get('city')
+                )
+        elif request.args.get('city') == 'Tokyo':
+            get_tweets_tokyo(request.args.get('term'), request.args.get('lang'))
+            if (request.args.get('lang') != None):
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.language == request.args.get('lang'),
+                    Tweet.city == request.args.get('city')
+                )
+            else:
+                searched_tweets = session.query(Tweet).filter(
+                    Tweet.tweet.contains(request.args.get('term')),
+                    Tweet.city == request.args.get('city')
+                )
     
     return render_template('Lasttweet/search.html', form=form, tweets=searched_tweets)
 

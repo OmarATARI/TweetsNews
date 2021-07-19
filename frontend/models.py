@@ -15,6 +15,8 @@ class Tweet(Base):
   tweet_id = Column(String)
   language = Column(String)
   author = Column(String)
+  geocode = Column(String)
+  city = Column(String)
 
   def __repr__(self):
     return "<Tweet %r>" % self.tweet_id
