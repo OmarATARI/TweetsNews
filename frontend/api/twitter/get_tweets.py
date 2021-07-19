@@ -4,13 +4,13 @@ import requests
 from urllib.parse import unquote
 from database import session
 from models import Tweet
-import os
+import os, time, logging
 
-def get_tweets(q, lang):
+def get_tweets(q, lang, cpt = 1):
     auth_token = os.environ['TWITTER_BEARER']
     hed = {'Authorization': 'Bearer ' + auth_token}
     response = requests.get('https://api.twitter.com/1.1/search/tweets.json?q={0}&lang={1}'.format(q, lang), headers=hed)
-    if response.status_code == 200:
+    try:
         data = response.json()['statuses'] 
 
         results = []
@@ -26,9 +26,16 @@ def get_tweets(q, lang):
 
         session.commit()
         return results
-    else:
-        print('An Error occured')
-        return False
+    except requests.exceptions.Timeout:
+        if cpt <= 3:
+            time.sleep(3)
+            get_tweets(q, lang, cpt = cpt+1)
+        else:
+            logging.error('TimeOut: Max retry excedded for the api call')
+    except requests.exceptions.TooManyRedirects:
+        logging.error('TooManyRedirects: Check the URL')
+    except requests.exceptions.RequestException as e:
+        logging.error(f"An error occured when you called the twitter api: {e}")
 
 
 ## Réponse type de l'api - data variable

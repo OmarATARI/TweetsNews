@@ -5,12 +5,14 @@ from urllib.parse import unquote
 from database import session
 from models import Trend
 import os
+import time
+import logging
 
-def main_endpoint(woeid, city_title):
+def main_endpoint(woeid, city_title, cpt = 1):
     auth_token = os.environ['TWITTER_BEARER']
     hed = {'Authorization': 'Bearer ' + auth_token}
     response = requests.get("https://api.twitter.com/1.1/trends/place.json?id={0}".format(woeid), headers=hed)
-    if response.status_code == 200:
+    try:
         data = response.json()[0]['trends']
 
         results = []
@@ -21,9 +23,16 @@ def main_endpoint(woeid, city_title):
 
         session.commit()
         return results
-    else:
-        print('An Error occured')
-        return False
+    except requests.exceptions.Timeout:
+        if cpt <= 3:
+            time.sleep(3)
+            main_endpoint(woeid, city_title, cpt= cpt+1)
+        else:
+            logging.error('TimeOut: Max retry excedded for the api call')
+    except requests.exceptions.TooManyRedirects:
+        logging.error('TooManyRedirects: Check the URL')
+    except requests.exceptions.RequestException as e:
+        logging.error(f"An error occured when you called the twitter api: {e}")
 
 def get_paris_trends():
     return main_endpoint(615702, 'Paris')
