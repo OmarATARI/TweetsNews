@@ -15,4 +15,5 @@ class ExportForm(FlaskForm):
 class SearchTweetsForm(FlaskForm):
   term = StringField('Recherche')
   lang = SelectField(u'Language', choices=[('fr', 'Français'), ('en', 'Anglais'), ('de', 'Allemand'), ('es', 'Espagnol')])
+  city = SelectField(u'Ville', choices=[('Paris', 'Paris'), ('Londres', 'Londres'), ('Seoul', 'Seoul'), ('Tokyo', 'Tokyo'), ('Sydney', 'Sydney'), ('New-York', 'New-York')])
   submit = SubmitField('Rechercher')
